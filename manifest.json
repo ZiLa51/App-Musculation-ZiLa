@@ -1,6 +1,6 @@
 {
-  "name": "Muscu Offline",
-  "short_name": "Muscu",
+  "name": "Training Camp",
+  "short_name": "TC",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b0f14",
