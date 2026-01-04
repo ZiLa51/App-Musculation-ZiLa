@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>Training Camp</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- Splash Screen -->
+<div id="splash">
+  <div class="splash-overlay">
+    <div class="splash-title">
+      <h1>TRAINING <span>CAMP</span></h1>
+      <p>Transforme ta force</p>
+    </div>
+
+    <button id="startApp">COMMENCER</button>
+  </div>
+</div>
+
+
+
+
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div>
+      <div>
+        <div class="title">Training Camp</div>
+        <div class="subtitle" id="statusText">100% local</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="ghost" id="btnExport" title="Exporter JSON">Exporter</button>
+      <button class="ghost" id="btnImport" title="Importer JSON">Importer</button>
+      <input type="file" id="importFile" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <main class="layout">
+    <nav class="tabs">
+      <button class="tab active" data-tab="workout">Séance</button>
+      <button class="tab" data-tab="templates">Programmes</button>
+      <button class="tab" data-tab="exercises">Exercices</button>
+      <button class="tab" data-tab="history">Historique</button>
+    </nav>
+
+    <!-- TAB: WORKOUT -->
+    <section class="panel active" id="tab-workout">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="h1">Démarrer une séance</div>
+            <div class="muted">Choisis un programme, puis saisis tes séries (charge + reps).</div>
+          </div>
+          <button class="primary" id="btnStart">Démarrer</button>
+        </div>
+
+        <div class="row wrap">
+          <label class="field">
+            <span>Programme</span>
+            <select id="workoutTemplateSelect"></select>
+          </label>
+
+          <label class="field">
+            <span>Date</span>
+            <input id="workoutDate" type="date" />
+          </label>
+
+          <label class="field">
+            <span>Repos (minuteur)</span>
+            <select id="restPreset">
+              <option value="60">60s</option>
+              <option value="90">90s</option>
+              <option value="120" selected>120s</option>
+              <option value="180">180s</option>
+            </select>
+          </label>
+
+          <div class="timer">
+            <button class="ghost" id="btnTimer">Start</button>
+            <div class="timerText" id="timerText">01:30</div>
+            <button class="ghost" id="btnTimerReset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" id="workoutArea"></div>
+
+      <div class="footer-actions">
+        <button class="ghost" id="btnDiscard" disabled>Annuler</button>
+        <button class="primary" id="btnFinish" disabled>Terminer & Sauver</button>
+      </div>
+    </section>
+
+    <!-- TAB: TEMPLATES -->
+    <section class="panel" id="tab-templates">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="h1">Programmes</div>
+            <div class="muted">Tes séances pré-remplies (Bras / Pecs / Dos / Jambes / Épaules / Abdos).</div>
+          </div>
+          <button class="primary" id="btnAddTemplate">+ Nouveau</button>
+        </div>
+      </div>
+
+      <div class="stack" id="templatesList"></div>
+    </section>
+
+    <!-- TAB: EXERCISES -->
+    <section class="panel" id="tab-exercises">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="h1">Exercices</div>
+            <div class="muted">Ajoute tes exercices et assigne-les à un groupe.</div>
+          </div>
+          <button class="primary" id="btnAddExercise">+ Ajouter</button>
+        </div>
+
+        <div class="row wrap">
+          <label class="field">
+            <span>Filtrer (groupe)</span>
+            <select id="exerciseFilter">
+              <option value="">Tous</option>
+              <option>Bras</option>
+              <option>Pecs</option>
+              <option>Dos</option>
+              <option>Jambes</option>
+              <option>Épaules</option>
+              <option>Abdos</option>
+            </select>
+          </label>
+          <label class="field grow">
+            <span>Recherche</span>
+            <input id="exerciseSearch" placeholder="Ex: développé couché..." />
+          </label>
+        </div>
+      </div>
+
+      <div class="stack" id="exercisesList"></div>
+    </section>
+
+    <!-- TAB: HISTORY -->
+    <section class="panel" id="tab-history">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="h1">Historique & PR</div>
+            <div class="muted">Tes séances enregistrées + records par exercice.</div>
+          </div>
+          <button class="ghost" id="btnClearAll" title="Effacer toutes les données">Tout effacer</button>
+        </div>
+      </div>
+
+      <div class="stack" id="prsList"></div>
+      <div class="stack" id="historyList"></div>
+    </section>
+  </main>
+
+  <!-- MODAL (generic) -->
+  <div class="modalBackdrop" id="modalBackdrop" hidden>
+    <div class="modal">
+      <div class="modalHead">
+        <div class="modalTitle" id="modalTitle">Titre</div>
+        <button class="ghost" id="modalClose">✕</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+      <div class="modalFoot" id="modalFoot"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
